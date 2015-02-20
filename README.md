@@ -106,7 +106,7 @@ Search for Infoblox for IPAM IPv4 addresses between two IPs
 
         Get-IBObject -Filters $filters -Object IPV4Address
         
-  #NOTES
+#NOTES
 
   Publishing this as a reference to a blog post.  Infoblox' Web API highlights [the need for vendors to provide PowerShell modules](https://ramblingcookiemonster.wordpress.com/2015/02/07/rest-powershell-and-infoblox/) layered on top of their APIs, rather than offloading this to their customers.
 
@@ -114,3 +114,9 @@ Search for Infoblox for IPAM IPv4 addresses between two IPs
   * Unique syntax and formatting that you must read up on and implement, including features like paging and filters
   * I'm not too familiar with the Infoblox.  I'm a consumer of a few services, and happen to like using PowerShell.  Someone more familiar with the technology (the vendor) should be writing a PowerShell module.
   * I'm only going to spend as much time as needed to get a result that meets my needs for reliability, functionality, and configuration.
+
+Thanks to Don Smith and Anders Wahlqvist for ideas (and likely code snippets, this was written a long time ago)
+
+ * [REST-PowerShell](https://github.com/Infoblox-API/REST-PowerShell)
+ * [Infoblox-PowerShell-Module](https://github.com/DollarUnderscore/Infoblox-PowerShell-Module)
+
