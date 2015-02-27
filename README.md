@@ -110,7 +110,7 @@ Search for Infoblox for IPAM IPv4 addresses between two IPs
 	
 #NOTES
 
-  Publishing this as a reference to []this blog post](https://ramblingcookiemonster.wordpress.com/2015/02/26/querying-the-infoblox-web-api-with-powershell/).  Infoblox' Web API highlights [the need for vendors to provide PowerShell modules](https://ramblingcookiemonster.wordpress.com/2015/02/07/rest-powershell-and-infoblox/) layered on top of their APIs, rather than offloading this to their customers.
+  Publishing this as a reference to [this blog post](https://ramblingcookiemonster.wordpress.com/2015/02/26/querying-the-infoblox-web-api-with-powershell/).  Infoblox' Web API highlights [the need for vendors to provide PowerShell modules](https://ramblingcookiemonster.wordpress.com/2015/02/07/rest-powershell-and-infoblox/) layered on top of their APIs, rather than offloading this to their customers.
 
   * The API documentation this used was 962 pages (most of which you can skip, thankfully)
   * Unique syntax and formatting that you must read up on and implement, including features like paging and filters
