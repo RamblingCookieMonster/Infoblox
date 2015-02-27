@@ -33,87 +33,90 @@ Search for Infoblox for IPAM IPv4 addresses between two IPs
 
 #Instructions
 
-    # One time setup
-        # Download the repository
-        # Unblock the zip
-        # Extract the Infoblox folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
+```powershell
+# One time setup
+    # Download the repository
+    # Unblock the zip
+    # Extract the Infoblox folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
 
-    # Import the module.
-        Import-Module Infoblox    #Alternatively, Import-Module \\Path\To\Infoblox
+# Import the module.
+    Import-Module Infoblox    #Alternatively, Import-Module \\Path\To\Infoblox
 
-    # Get commands in the module
-        Get-Command -Module Infoblox
+# Get commands in the module
+    Get-Command -Module Infoblox
 
-    # Get help for a command or two
-        Get-Help Set-IBConfig -Full
-        Get-Help New-IBSession -Full
+# Get help for a command or two
+    Get-Help Set-IBConfig -Full
+    Get-Help New-IBSession -Full
 
-    # Optional persistent default config setup
-    # This configures Infoblox.xml in your module folder, will load each time you import the module
-        Set-IBConfig -Uri "https://grid.contoso.com" -IBVersion "v1.6"
+# Optional persistent default config setup
+# This configures Infoblox.xml in your module folder, will load each time you import the module
+    Set-IBConfig -Uri "https://grid.contoso.com" -IBVersion "v1.6"
 
-    # View the current config settings
-        Get-IBConfig
+# View the current config settings
+    Get-IBConfig
 
-    # Establish a new session.  This uses the IBConfig Uri and IBVersion
-        New-IBSession -Credential (Get-Credential)
+# Establish a new session.  This uses the IBConfig Uri and IBVersion
+    New-IBSession -Credential (Get-Credential)
 
-        # Note! if you don't have certificates set up correctly, you may see the following error.  Set-TrustAllCertsPolicy is a temporary solution
-        # Error retrieving session: The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.
-        # Set-TrustAllCertsPolicy
+    # Note! if you don't have certificates set up correctly, you may see the following error.  Set-TrustAllCertsPolicy is a temporary solution
+    # Error retrieving session: The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.
+    # Set-TrustAllCertsPolicy
 
-    # Get all leases 
-        Get-IBLease
+# Get all leases 
+    Get-IBLease
 
-    # Get leases for any address in 192.168.0., with a free binding state
-        Get-IBLease -Address 192.168.0. | Where {$_.binding_state -like "FREE"}
+# Get leases for any address in 192.168.0., with a free binding state
+    Get-IBLease -Address 192.168.0. | Where {$_.binding_state -like "FREE"}
 
-    # Get a list of all networks defined on the InfoBlox.  Get-IBObject is a generic wrapper to pull random object types
-        Get-IBObject -Object Network
+# Get a list of all networks defined on the InfoBlox.  Get-IBObject is a generic wrapper to pull random object types
+    Get-IBObject -Object Network
 
-    # Maybe you want to go from an IP address to a network:
+# Maybe you want to go from an IP address to a network:
 
-        # Get network from IPAM for a single IP
-            $filter = [pscustomobject]@{
-                        Object="ip_address"
-                        Operator="="
-                        Filter="192.168.0.54"
-                    }
+    # Get network from IPAM for a single IP
+        $filter = [pscustomobject]@{
+                    Object="ip_address"
+                    Operator="="
+                    Filter="192.168.0.54"
+                }
 
-            $Network = Get-IBObject -Filters $filter -Object IPV4Address | Select -ExpandProperty network
+        $Network = Get-IBObject -Filters $filter -Object IPV4Address | Select -ExpandProperty network
 
 
-        # Get the corresponding network object
-            $filter = [pscustomobject]@{
-                        Object="network"
-                        Operator="="
-                        Filter=$Network
-                    }
+    # Get the corresponding network object
+        $filter = [pscustomobject]@{
+                    Object="network"
+                    Operator="="
+                    Filter=$Network
+                }
 
-            Get-IBObject -Filters $filter -Object Network 
+        Get-IBObject -Filters $filter -Object Network 
 
-    # Find all IPAM IPv4 Addresses between two IPs
-        $filters = [pscustomobject]@{
-            Object="ip_address"
-            Operator=">="
-            Filter="192.168.0.10"
-        },
-        [pscustomobject]@{
-            Object="ip_address"
-            Operator="<="
-            Filter="19.168.0.100"
-        }
+# Find all IPAM IPv4 Addresses between two IPs
+    $filters = [pscustomobject]@{
+        Object="ip_address"
+        Operator=">="
+        Filter="192.168.0.10"
+    },
+    [pscustomobject]@{
+        Object="ip_address"
+        Operator="<="
+        Filter="19.168.0.100"
+    }
 
-        Get-IBObject -Filters $filters -Object IPV4Address
-        
+    Get-IBObject -Filters $filters -Object IPV4Address
+```
+	
 #NOTES
 
-  Publishing this as a reference to a blog post.  Infoblox' Web API highlights [the need for vendors to provide PowerShell modules](https://ramblingcookiemonster.wordpress.com/2015/02/07/rest-powershell-and-infoblox/) layered on top of their APIs, rather than offloading this to their customers.
+  Publishing this as a reference to []this blog post](https://ramblingcookiemonster.wordpress.com/2015/02/26/querying-the-infoblox-web-api-with-powershell/).  Infoblox' Web API highlights [the need for vendors to provide PowerShell modules](https://ramblingcookiemonster.wordpress.com/2015/02/07/rest-powershell-and-infoblox/) layered on top of their APIs, rather than offloading this to their customers.
 
   * The API documentation this used was 962 pages (most of which you can skip, thankfully)
   * Unique syntax and formatting that you must read up on and implement, including features like paging and filters
   * I'm not too familiar with the Infoblox.  I'm a consumer of a few services, and happen to like using PowerShell.  Someone more familiar with the technology (the vendor) should be writing a PowerShell module.
   * I'm only going to spend as much time as needed to get a result that meets my needs for reliability, functionality, and configuration.
+  * I have other priorities.  Reading through pages upon pages of documentation that only applies to a single product's API is inefficient.  This is one of the benefits of PowerShell; I learn a bit about the language, and it applies to the AD, VMware, SQL, and other PowerShell-enabled technologies.
 
 Thanks to Don Smith and Anders Wahlqvist for ideas (and likely code snippets, this was written a long time ago)
 
