@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/9xnsg4e3hfa7uank/branch/master?svg=true)](https://ci.appveyor.com/project/RamblingCookieMonster/infoblox)
+
 Infoblox PowerShell Module
 =============
 
