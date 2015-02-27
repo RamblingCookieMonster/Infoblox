@@ -30,15 +30,15 @@
         $IBSession
     )
 
-    if($IBVersion)
+    if($PSBoundParameters.ContainsKey('IBVersion'))
     {
         $Script:IBConfig.IBVersion = $IBVersion
     }
-    If($Uri)
+    If($PSBoundParameters.ContainsKey('Uri'))
     {
         $Script:IBConfig.Uri = $Uri
     }
-    If($IBSession)
+    If($PSBoundParameters.ContainsKey('IBSession'))
     {
         $Script:IBConfig.IBSession = $IBSession
     }

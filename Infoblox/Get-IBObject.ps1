@@ -102,7 +102,6 @@
                         Write-Warning "Discarding Filter, invalid Operator $($Filter | Format-List | Out-String)`n.  Use $($ValidOperators -join ", ")"
                     }
                 }
-
             }
 
             if($Properties)
