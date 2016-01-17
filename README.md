@@ -125,3 +125,4 @@ Thanks to Don Smith and Anders Wahlqvist for ideas (and likely code snippets, th
  * [REST-PowerShell](https://github.com/Infoblox-API/REST-PowerShell)
  * [Infoblox-PowerShell-Module](https://github.com/DollarUnderscore/Infoblox-PowerShell-Module)
 
+Project Status, 1/17/2016: I no longer work with or have access to an Infoblox. Feel free to fork this or use it as needed, but there will likely be no further development, barring external contributions.
